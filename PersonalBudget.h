@@ -9,7 +9,10 @@ class PersonalBudget
 {
     UserMenager userMenager;
 public:
+    PersonalBudget(string nameFileWithUsers) : userMenager(nameFileWithUsers){};
+
     bool isUserLoggedIn();
+    void userRegistration();
 
 };
 

@@ -1,11 +1,25 @@
 #ifndef FILEWITHUSERS_H
 #define FILEWITHUSERS_H
 
+#include <iostream>
+#include <vector>
+#include <cstring>
+#include <string>
+
+#include "Markup.h"
+#include "XMLFile.h"
+#include "User.h"
+
 
 using namespace std;
 
-class FileWithUsers
+class FileWithUsers : public XMLFile
 {
+    string nameFileWithUsers;
+
+public:
+    FileWithUsers(string nameFileWithUsers) : XMLFile(nameFileWithUsers){};
+    void addUserToFile(User user);
 
 };
 
