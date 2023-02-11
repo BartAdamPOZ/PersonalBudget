@@ -31,6 +31,7 @@ public:
     bool isUserLoggedIn();
     void userRegistration();
     void userLogIn();
+    int logOut();
 };
 
 

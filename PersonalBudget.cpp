@@ -14,3 +14,8 @@ void PersonalBudget::userLogIn()
 {
     userMenager.userLogIn();
 }
+
+void PersonalBudget::logOut()
+{
+    userMenager.logOut();
+}

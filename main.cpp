@@ -61,7 +61,7 @@ int main()
                 //personalBudget.changePasswordLogInUser();
                 break;
             case '7':
-                //personalBudget.logOut();
+                personalBudget.logOut();
                 break;
             }
         }

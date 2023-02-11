@@ -97,3 +97,8 @@ void UserMenager::userLogIn()
     return;
 
 }
+
+int UserMenager::logOut()
+{
+    return logInUserId = 0;
+}
