@@ -60,8 +60,6 @@ vector <User> FileWithUsers::loadUserFromFile()
             user.setUserSurname(userSurname);
 
             users.push_back(user);
-            cout << "Wczytano uzytkownika z pliku" << endl;
-            Sleep(3000);
 
             xml.OutOfElem();
         }
@@ -70,3 +68,29 @@ vector <User> FileWithUsers::loadUserFromFile()
     return users;
 }
 
+void FileWithUsers::changePasswordInFile(User user)
+{
+    CMarkup xml;
+    string nameFileWithUsers = XMLFile::getFileName();
+    bool fileExists = xml.Load(nameFileWithUsers);
+
+    if (fileExists)
+    {
+        xml.FindElem();
+        xml.IntoElem();
+
+        while (xml.FindElem("User") == true)
+        {
+            xml.IntoElem();
+            xml.FindElem("UserId");
+            int userId = atoi(xml.GetData().c_str());
+            if (userId == user.getId())
+            {
+                xml.FindElem("Password");
+                xml.SetData(user.getPassword());
+                xml.Save(nameFileWithUsers);
+            }
+            xml.OutOfElem();
+        }
+    }
+}

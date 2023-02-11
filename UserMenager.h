@@ -32,6 +32,7 @@ public:
     void userRegistration();
     void userLogIn();
     int logOut();
+    void changePasswordLogInUser();
 };
 
 

@@ -102,3 +102,21 @@ int UserMenager::logOut()
 {
     return logInUserId = 0;
 }
+
+void UserMenager::changePasswordLogInUser()
+{
+    string newPassword = "";
+    cout << "Set new password: ";
+    for ( unsigned int i = 0; i < users.size(); i++)
+    {
+        if (users[i].getId() == logInUserId)
+        {
+            users[i].setPassword(SupportingMethods::loadLine());
+
+            cout << "You set new password." << endl << endl;
+
+            fileWithUsers.changePasswordInFile(users[i]);
+            system("pause");
+        }
+    }
+}

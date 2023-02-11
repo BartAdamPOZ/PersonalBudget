@@ -22,6 +22,7 @@ public:
     FileWithUsers(string nameFileWithUsers) : XMLFile(nameFileWithUsers){};
     void addUserToFile(User user);
     vector <User> loadUserFromFile();
+    void changePasswordInFile(User user);
 
 };
 
