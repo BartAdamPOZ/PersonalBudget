@@ -10,7 +10,7 @@ int main()
 {
     char choice;
 
-    PersonalBudget personalBudget("Users");
+    PersonalBudget personalBudget("Users.xml");
 
 
     while (true)
@@ -25,7 +25,7 @@ int main()
                 personalBudget.userRegistration();
                 break;
             case '2':
-                //personalBudget.userLogIn();
+                personalBudget.userLogIn();
                 break;
             case '9':
                 exit(0);

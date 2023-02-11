@@ -27,4 +27,46 @@ void FileWithUsers::addUserToFile(User user)
 
 }
 
+vector <User> FileWithUsers::loadUserFromFile()
+{
+    User user;
+    vector <User> users;
+
+    CMarkup xml;
+    string nameFileWithUsers = XMLFile::getFileName();
+    bool fileExists = xml.Load(nameFileWithUsers);
+
+    if (fileExists)
+    {
+        xml.FindElem();
+        xml.IntoElem();
+        while (xml.FindElem("User") == true)
+        {
+            xml.IntoElem();
+            xml.FindElem("UserId");
+            int userId = atoi(xml.GetData().c_str());
+            user.setId(userId);
+            xml.FindElem("Login");
+            string login = xml.GetData();
+            user.setLogin(login);
+            xml.FindElem("Password");
+            string password = xml.GetData();
+            user.setPassword(password);
+            xml.FindElem("Name");
+            string userName = xml.GetData();
+            user.setUserName(userName);
+            xml.FindElem("Surname");
+            string userSurname = xml.GetData();
+            user.setUserSurname(userSurname);
+
+            users.push_back(user);
+            cout << "Wczytano uzytkownika z pliku" << endl;
+            Sleep(3000);
+
+            xml.OutOfElem();
+        }
+
+    }
+    return users;
+}
 

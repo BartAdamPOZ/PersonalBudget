@@ -13,6 +13,7 @@ public:
 
     bool isUserLoggedIn();
     void userRegistration();
+    void userLogIn();
 
 };
 

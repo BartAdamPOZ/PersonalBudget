@@ -61,3 +61,39 @@ int UserMenager::getNewUserId()
     else
         return users.back().getId() + 1;
 }
+
+void UserMenager::userLogIn()
+{
+    User user;
+    string login = "", password = "";
+
+    cout << endl << "Enter login: ";
+    login = SupportingMethods::loadLine();
+
+    for (unsigned int i = 0; i < users.size(); i++)
+    {
+        if (users[i].getLogin() == login)
+        {
+            for (int numberOfTrial = 3; numberOfTrial > 0; numberOfTrial--)
+            {
+                cout << "Enter password. You have " << numberOfTrial << " left: ";
+                password = SupportingMethods::loadLine();
+
+                if (users[i].getPassword() == password)
+                {
+                    cout << endl << "Logged in." << endl << endl;
+                    system("pause");
+                    logInUserId = users[i].getId();
+                    return;
+                }
+            }
+            cout << "You have provided 3 times incorrect password." << endl;
+            system("pause");
+            return;
+        }
+    }
+    cout << endl << "Wrong login, try again. " << endl << endl;
+    system("pause");
+    return;
+
+}

@@ -5,6 +5,7 @@
 #include <vector>
 #include <cstring>
 #include <string>
+#include <windows.h>
 
 #include "Markup.h"
 #include "XMLFile.h"
@@ -20,6 +21,7 @@ class FileWithUsers : public XMLFile
 public:
     FileWithUsers(string nameFileWithUsers) : XMLFile(nameFileWithUsers){};
     void addUserToFile(User user);
+    vector <User> loadUserFromFile();
 
 };
 
