@@ -24,3 +24,8 @@ void PersonalBudget::changePasswordLogInUser()
 {
     userMenager.changePasswordLogInUser();
 }
+
+void PersonalBudget::addIncome()
+{
+    itemMenager->addIncome();
+}

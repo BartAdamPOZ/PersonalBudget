@@ -2,6 +2,7 @@
 
 #include "PersonalBudget.h"
 #include "SupportingMethods.h"
+#include "ItemMenager.h"
 
 
 using namespace std;
@@ -10,7 +11,7 @@ int main()
 {
     char choice;
 
-    PersonalBudget personalBudget("Users.xml");
+    PersonalBudget personalBudget("Users.xml","Incomes.xml");
 
 
     while (true)
