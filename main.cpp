@@ -2,7 +2,6 @@
 
 #include "PersonalBudget.h"
 #include "SupportingMethods.h"
-#include "ItemMenager.h"
 
 
 using namespace std;
@@ -44,7 +43,7 @@ int main()
             switch(choice)
             {
             case '1':
-                //personalBudget.addIncome();
+                personalBudget.addIncome();
                 break;
             case '2':
                 //personalBudget.addExpense();

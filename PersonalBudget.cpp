@@ -13,11 +13,17 @@ void PersonalBudget::userRegistration()
 void PersonalBudget::userLogIn()
 {
     userMenager.userLogIn();
+    if (userMenager.isUserLoggedIn())
+    {
+        itemMenager = new ItemMenager(NAME_FILE_WITH_INCOMES, userMenager.getLoggedUserId());
+    }
 }
 
 void PersonalBudget::logOut()
 {
     userMenager.logOut();
+    delete itemMenager;
+    itemMenager = NULL;
 }
 
 void PersonalBudget::changePasswordLogInUser()

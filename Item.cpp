@@ -1,10 +1,10 @@
 #include "Item.h"
 
-void Item::setDate(int newDate)
+/*void Item::setDate(int newDate)
 {
     if (newDate >= 0)
         itemDate = newDate;
-}
+}*/
 
 void Item::setStringDate(string newStringDate)
 {
@@ -49,6 +49,11 @@ string Item::getItemName()
 float Item::getItemAmount()
 {
     return itemAmount;
+}
+
+string Item::getItemDate()
+{
+    return itemDate;
 }
 
 int Item::getIntDate()

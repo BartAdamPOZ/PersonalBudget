@@ -2,6 +2,7 @@
 #define PERSONALBUDGET_H
 
 #include "UserMenager.h"
+#include "ItemMenager.h"
 
 using namespace std;
 
@@ -12,7 +13,8 @@ class PersonalBudget
     const string NAME_FILE_WITH_INCOMES;
 
 public:
-    PersonalBudget(string nameFileWithUsers, string nameFileWithIncomes) : userMenager(nameFileWithUsers), NAME_FILE_WITH_INCOMES(nameFileWithIncomes)
+    PersonalBudget(string nameFileWithUsers, string nameFileWithIncomes)
+    : userMenager(nameFileWithUsers), NAME_FILE_WITH_INCOMES(nameFileWithIncomes)
     {
         itemMenager = NULL;
     };

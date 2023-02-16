@@ -120,3 +120,8 @@ void UserMenager::changePasswordLogInUser()
         }
     }
 }
+
+int UserMenager::getLoggedUserId()
+{
+    return logInUserId;
+}

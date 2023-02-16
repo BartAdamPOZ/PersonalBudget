@@ -21,7 +21,7 @@ public:
         this->itemAmount = itemAmount;
     };
 
-    void setDate(int newDate);
+    /*void setDate(int newDate);*/
     void setStringDate(string newStringDate);
     void setUserId(int newUserId);
     void setItemId(int newItemId);
@@ -32,7 +32,9 @@ public:
     int getUserId();
     string getItemName();
     float getItemAmount();
+    string getItemDate();
     int getIntDate();
+
 
 
 };
