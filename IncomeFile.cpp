@@ -58,11 +58,8 @@ vector <Item> IncomeFile::getIncomesFromFile(int logInUserId)
             item.setItemAmount(itemAmount);
 
             if (userId == logInUserId)
-            {
                 incomes.push_back(item);
-                cout << "Dodano przychod, a jego id to: " << incomeId << endl;
-                Sleep (2000);
-            }
+
 
             xml.OutOfElem();
         }

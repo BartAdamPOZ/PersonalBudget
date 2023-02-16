@@ -6,8 +6,10 @@
 #include <sstream>
 #include <ctime>
 #include <windows.h>
+#include <cstdlib>
 
 #include "Date.h"
+#include "SupportingMethods.h"
 
 using namespace std;
 
@@ -32,6 +34,7 @@ public:
     bool isValidMonth(int month);
     bool isValidDay(int dayConverted, int monthConverted, int yearConverted);
     bool isValidFormatDate(string date);
+    bool isDateExist(string date);
 
     //void showDate(Date dateOb);
 

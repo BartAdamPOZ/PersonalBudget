@@ -42,10 +42,15 @@ int DateMenager::getCurrentDate()
 
 bool DateMenager::isLeap(int year)
 {
-    if (((year % 4 ==0) &&(year % 100 != 0)) || (year % 400 == 0))
+    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+    {
         return true;
+    }
+
     else
+    {
         return false;
+    }
 }
 
 bool DateMenager::isValidYear(int year)
@@ -78,7 +83,7 @@ bool DateMenager::isValidDay(int day, int month, int year)
         {
             return true;
         }
-        else if (day < 1 && day >= 30)
+        else if (day < 1 && day >= 29)
         {
             return false;
         }
@@ -105,7 +110,7 @@ bool DateMenager::isValidDay(int day, int month, int year)
             return false;
         }
     }
-    return true;
+    return false;
 }
 
 bool DateMenager::isValidFormatDate(string date)
@@ -119,35 +124,19 @@ bool DateMenager::isValidFormatDate(string date)
 bool DateMenager::isDateCorrect(string date)
 {
     int year = (date[0]-'0')*1000 + (date[1]-'0')*100 + (date[2]-'0')*10 + (date[3]-'0');
-    cout << year << endl;
-    Sleep(2000);
     int month = (date[5]-'0')*10 + (date[6]-'0');
-    cout << month << endl;
-    Sleep(2000);
     int day = (date[8]-'0')*10 + (date[9]-'0');
-    cout << day << endl;
-    Sleep(2000);
 
     if (isValidFormatDate(date) == false) {
-        cout << "isValidFormatDate jest false" << endl;
-        Sleep(2000);
         return false;
     } else if (isValidYear (year) == false) {
-        cout << "isValidYear jest false" << endl;
-        Sleep(2000);
         return false;
-    } else if (isValidMonth(month) == false /*|| month > getCurrentMonth()*/) { // tutaj trzeba dopisac funkcje sprawdzajaca czy rok jest ten sam i wtedy sprawdzic czy wpisany miesiac jest wiekszy badz rowny obecnemu
-        cout << "isValidMonth jest false" << endl;
-        Sleep(2000);
+    } else if (isValidMonth(month) == false) {
         return false;
     } else if (day >= 1 && day <= 31) {
         if (isValidDay(day, month, year) == true) {
-            cout << "isValidDay jest true" << endl;
-            Sleep (2000);
             return true;
         } else {
-            cout << "isValidDay jest false" << endl;
-            Sleep (2000);
             return false;
         }
     } else {
@@ -164,3 +153,14 @@ bool DateMenager::isDateCorrect(string date)
     cout << "Month: " << dateOb.getMonth() << endl;
     cout << "Day: " << dateOb.getDay() << endl;
 }*/
+
+bool DateMenager::isDateExist(string date)
+{
+    string stringDateWithoutDash = SupportingMethods::removeDashFromDate(date);
+    int intDateWithoutDash = SupportingMethods::convertStringToInt(stringDateWithoutDash);
+
+    if (intDateWithoutDash > getCurrentDate())
+        return false;
+    else
+        return true;
+}

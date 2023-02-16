@@ -46,9 +46,9 @@ Item ItemMenager::provideIncomeDetails()
     else if (choice == 'n')
     {
         do{
-            cout << "Provide date in format YYYY-MM-DD: ";
+            cout << "Provide past date in format YYYY-MM-DD: ";
             otherDate = SupportingMethods::loadLine();
-        } while (dateMenager.isDateCorrect(otherDate) == false);
+        } while (dateMenager.isDateCorrect(otherDate) == false || dateMenager.isDateExist(otherDate) == false);
         stringDateWithoutDash = SupportingMethods::removeDashFromDate(otherDate);
         intDateWithoutDash = SupportingMethods::convertStringToInt(stringDateWithoutDash);
         item.setStringDate(otherDate);
