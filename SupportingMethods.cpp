@@ -65,3 +65,84 @@ char SupportingMethods::getCharacter()
     }
     return character;
 }
+
+float SupportingMethods::loadFloat()
+{
+    string providedData = "";
+    float number;
+
+    while (true)
+    {
+        cin.clear();
+        getline(cin, providedData);
+
+        stringstream myStream(providedData);
+        if (myStream >> number)
+            break;
+        cout << "This is not the amount. Please add again. " << endl;
+    }
+    return number;
+}
+
+string SupportingMethods::addDashToDate(string date)
+{
+    string stringDateWithDash;
+    stringDateWithDash = date.insert(4,1,'-');
+    stringDateWithDash = stringDateWithDash.insert(7,1,'-');
+
+    return stringDateWithDash;
+}
+
+string SupportingMethods::convertIntToString(int number)
+{
+    ostringstream ss;
+    ss << number;
+    string str = ss.str();
+
+    return str;
+}
+
+string SupportingMethods::removeDashFromDate(string date)
+{
+    string stringDateWithoutDash;
+
+    for (unsigned int i = 0; i < date.length(); i++)
+    {
+        if (date[i] != '-')
+        {
+            stringDateWithoutDash += date[i];
+        }
+    }
+    return stringDateWithoutDash;
+}
+
+int SupportingMethods::convertStringToInt(string number)
+{
+    int numberInt;
+    istringstream iss(number);
+    iss >> numberInt;
+
+    return numberInt;
+}
+
+string SupportingMethods::switchFirstLetterToBiggerOthersToSmaller(string text)
+{
+    if (!text.empty())
+    {
+        transform(text.begin(), text.end(), text.begin(), ::tolower);
+        text[0] = toupper(text[0]);
+    }
+    return text;
+}
+
+string SupportingMethods::convertFloatToString(float amount)
+{
+    stringstream FloatToStr;
+    string str;
+
+    FloatToStr << amount;
+    FloatToStr >> str;
+    FloatToStr.clear();
+
+    return str;
+}
