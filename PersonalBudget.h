@@ -11,10 +11,11 @@ class PersonalBudget
     UserMenager userMenager;
     ItemMenager *itemMenager;
     const string NAME_FILE_WITH_INCOMES;
+    const string NAME_FILE_WITH_EXPENSES;
 
 public:
-    PersonalBudget(string nameFileWithUsers, string nameFileWithIncomes)
-    : userMenager(nameFileWithUsers), NAME_FILE_WITH_INCOMES(nameFileWithIncomes)
+    PersonalBudget(string nameFileWithUsers, string nameFileWithIncomes, string nameFileWithExpenses)
+    : userMenager(nameFileWithUsers), NAME_FILE_WITH_INCOMES(nameFileWithIncomes), NAME_FILE_WITH_EXPENSES(nameFileWithExpenses)
     {
         itemMenager = NULL;
     };
@@ -31,6 +32,7 @@ public:
     void logOut();
     void changePasswordLogInUser();
     void addIncome();
+    void addExpense();
 
 };
 

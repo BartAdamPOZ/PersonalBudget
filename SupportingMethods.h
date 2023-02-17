@@ -22,6 +22,7 @@ class SupportingMethods
         static int convertStringToInt(string number);
         static string switchFirstLetterToBiggerOthersToSmaller (string text);
         static string convertFloatToString (float amount);
+        static string changeComaToDot(string stringAmount);
 
 };
 
