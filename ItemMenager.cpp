@@ -59,7 +59,9 @@ Item ItemMenager::provideIncomeDetails()
     itemName = SupportingMethods::loadLine();
     item.setItemName(itemName);
     cout << "Provide amount: ";
-    amount = SupportingMethods::loadFloat();
+    stringAmount = SupportingMethods::loadLine();
+    stringAmount = SupportingMethods::changeComaToDot(stringAmount);
+    amount = stof(stringAmount);
     item.setItemAmount(amount);
 
     return item;
