@@ -119,8 +119,6 @@ Item ItemMenager::provideExpenseDetails()
         stringDateWithoutDash = SupportingMethods::removeDashFromDate(otherDate);
         intDateWithoutDash = SupportingMethods::convertStringToInt(stringDateWithoutDash);
         item.setStringDate(otherDate);
-        cout << otherDate << endl;
-        Sleep (3000);
     }
     cout << "Provide item desciption: ";
     itemName = SupportingMethods::loadLine();
