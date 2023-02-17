@@ -146,3 +146,13 @@ string SupportingMethods::convertFloatToString(float amount)
 
     return str;
 }
+
+string SupportingMethods::changeComaToDot(string stringAmount)
+{
+    for (unsigned int i = 0; i < stringAmount.length(); i++)
+    {
+        if (stringAmount[i] == ',')
+            stringAmount[i] = '.';
+    }
+    return stringAmount;
+}
