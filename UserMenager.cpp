@@ -33,10 +33,10 @@ User UserMenager::provideDataOfNewUser()
     user.setPassword(SupportingMethods::loadLine());
 
     cout << "Set Name: ";
-    user.setUserName(SupportingMethods::loadLine());
+    user.setUserName(SupportingMethods::switchFirstLetterToBiggerOthersToSmaller(SupportingMethods::loadLine()));
 
     cout << "Set Surname: ";
-    user.setUserSurname(SupportingMethods::loadLine());
+    user.setUserSurname(SupportingMethods::switchFirstLetterToBiggerOthersToSmaller(SupportingMethods::loadLine()));
 
     return user;
 }
