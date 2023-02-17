@@ -15,7 +15,7 @@ void PersonalBudget::userLogIn()
     userMenager.userLogIn();
     if (userMenager.isUserLoggedIn())
     {
-        itemMenager = new ItemMenager(NAME_FILE_WITH_INCOMES, userMenager.getLoggedUserId());
+        itemMenager = new ItemMenager(NAME_FILE_WITH_INCOMES, NAME_FILE_WITH_EXPENSES, userMenager.getLoggedUserId());
     }
 }
 
@@ -35,3 +35,9 @@ void PersonalBudget::addIncome()
 {
     itemMenager->addIncome();
 }
+
+void PersonalBudget::addExpense()
+{
+    itemMenager->addExpense();
+}
+

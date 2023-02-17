@@ -10,7 +10,7 @@ int main()
 {
     char choice;
 
-    PersonalBudget personalBudget("Users.xml","Incomes.xml");
+    PersonalBudget personalBudget("Users.xml","Incomes.xml","Expenses.xml");
 
 
     while (true)
@@ -46,7 +46,7 @@ int main()
                 personalBudget.addIncome();
                 break;
             case '2':
-                //personalBudget.addExpense();
+                personalBudget.addExpense();
                 break;
             case '3':
                 //personalBudget.displayBalanceForCurrentMonth();
