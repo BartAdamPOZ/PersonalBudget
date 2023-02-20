@@ -50,6 +50,7 @@ vector <Item> IncomeFile::getIncomesFromFile(int logInUserId)
             xml.FindElem("Date");
             string itemDate = xml.GetData();
             item.setStringDate(itemDate);
+            item.setIntDate(SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(itemDate)));
             xml.FindElem("Item");
             string itemName = xml.GetData();
             item.setItemName(itemName);

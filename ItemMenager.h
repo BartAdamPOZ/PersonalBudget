@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 #include "IncomeFile.h"
 #include "ExpenseFile.h"
@@ -39,6 +40,7 @@ public:
     void addIncome();
     void addExpense();
     void displayBalanceForCurrentMonth();
+    /*bool sortByIntDate (Item &a,Item &b);*/
 };
 
 

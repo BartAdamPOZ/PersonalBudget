@@ -12,13 +12,14 @@ class Item
     float itemAmount;
 
 public:
-    Item(int itemId = 0, int userId = 0, string itemDate = "", string itemName = "", float itemAmount = 0.0)
+    Item(int itemId = 0, int userId = 0, string itemDate = "", string itemName = "", float itemAmount = 0.0, int intDate = 0)
     {
         this->itemId = itemId;
         this->userId = userId;
         this->itemDate = itemDate;
         this->itemName = itemName;
         this->itemAmount = itemAmount;
+        this->intDate = intDate;
     };
 
     /*void setDate(int newDate);*/
@@ -27,6 +28,7 @@ public:
     void setItemId(int newItemId);
     void setItemName(string newItemName);
     void setItemAmount(float newItemAmount);
+    void setIntDate(int newIntDate);
 
     int getItemId();
     int getUserId();

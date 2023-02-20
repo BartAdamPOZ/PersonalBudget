@@ -41,3 +41,7 @@ void PersonalBudget::addExpense()
     itemMenager->addExpense();
 }
 
+void PersonalBudget::displayBalanceForCurrentMonth()
+{
+    itemMenager->displayBalanceForCurrentMonth();
+}

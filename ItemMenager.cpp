@@ -135,5 +135,36 @@ Item ItemMenager::provideExpenseDetails()
 
 void ItemMenager::displayBalanceForCurrentMonth()
 {
+    Item income;
+    Item expense;
+    vector <Item> incomesToSort;
+    vector <Item> expensesToSort;
+
+    int boarderDatePast = dateMenager.getCurrentDate() - dateMenager.getCurrentDay(); // wyswietla 20230200
+
+    for (unsigned int i = 0; i < incomes.size(); i++)
+    {
+        int intDate = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(incomes[i].getItemDate()));
+
+        if (intDate > boarderDatePast)
+        {
+            income.setStringDate(incomes[i].getItemDate());
+            income.setUserId(incomes[i].getUserId());
+            income.setItemId(incomes[i].getItemId());
+            income.setItemName(incomes[i].getItemName());
+            income.setItemAmount(incomes[i].getItemAmount());
+
+            incomesToSort.push_back(income);
+        }
+    }
+    sort(incomesToSort.begin( ), incomesToSort.end( ), [ ]( const auto& lhs, const auto& rhs )
+{
+   return lhs.getIntDate() < rhs.getIntDate();
+});
 
 }
+
+/*bool ItemMenager::sortByIntDate (Item &a,Item &b)
+{
+    return a.getIntDate() < b.getIntDate();
+}*/
