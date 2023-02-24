@@ -140,7 +140,17 @@ void ItemMenager::displayBalanceForCurrentMonth()
     vector <Item> incomesToSort;
     vector <Item> expensesToSort;
 
-    int boarderDatePast = dateMenager.getCurrentDate() - dateMenager.getCurrentDay(); // wyswietla 20230200
+    float sumOfIncomes = 0;
+    float sumOfExpenses = 0;
+    int boarderDatePast = dateMenager.getCurrentDate() - dateMenager.getCurrentDay();
+
+    struct sortByIntDate
+    {
+        inline bool operator() (Item& struct1, Item& struct2)
+        {
+            return(struct1.getItemDate() < struct2.getItemDate());
+        }
+    };
 
     for (unsigned int i = 0; i < incomes.size(); i++)
     {
@@ -157,14 +167,54 @@ void ItemMenager::displayBalanceForCurrentMonth()
             incomesToSort.push_back(income);
         }
     }
-    sort(incomesToSort.begin( ), incomesToSort.end( ), [ ]( const auto& lhs, const auto& rhs )
-{
-   return lhs.getIntDate() < rhs.getIntDate();
-});
 
+    sort(incomesToSort.begin( ), incomesToSort.end( ), sortByIntDate());
+
+    cout << endl << "          <<< INCOMES >>> " << endl << endl;
+
+    for (unsigned int i = 0; i < incomesToSort.size(); i++)
+    {
+        cout << "DATE : " << incomesToSort[i].getItemDate() << endl;
+        cout << "NAME : " << incomesToSort[i].getItemName() << endl;
+        cout << "AMOUNT : " << incomesToSort[i].getItemAmount() << endl << endl;
+        sumOfIncomes += incomesToSort[i].getItemAmount();
+    }
+    cout << "SUM OF INCOMES : " << sumOfIncomes << "[PLN]" << endl << endl;
+
+
+    for (unsigned int i = 0; i < expenses.size(); i++)
+    {
+        int intDate = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(expenses[i].getItemDate()));
+
+        if (intDate > boarderDatePast)
+        {
+            expense.setStringDate(expenses[i].getItemDate());
+            expense.setUserId(expenses[i].getUserId());
+            expense.setItemId(expenses[i].getItemId());
+            expense.setItemName(expenses[i].getItemName());
+            expense.setItemAmount(expenses[i].getItemAmount());
+
+            expensesToSort.push_back(expense);
+        }
+    }
+
+    sort(expensesToSort.begin( ), expensesToSort.end( ), sortByIntDate());
+
+    cout << endl << "          <<< EXPENSES >>> " << endl << endl;
+
+    for (unsigned int i = 0; i < expensesToSort.size(); i++)
+    {
+        cout << "DATE : " << expensesToSort[i].getItemDate() << endl;
+        cout << "NAME : " << expensesToSort[i].getItemName() << endl;
+        cout << "AMOUNT : " << expensesToSort[i].getItemAmount() << endl << endl;
+        sumOfExpenses += expensesToSort[i].getItemAmount();
+    }
+    cout << "SUM OF EXPENSES : " << sumOfExpenses << "[PLN]" << endl << endl;
+
+    if (sumOfIncomes >= sumOfExpenses)
+        cout << "You generate : " << sumOfIncomes - sumOfExpenses << " [PLN] savings this month." << endl;
+    else
+        cout << "You generate : " << sumOfExpenses - sumOfIncomes << " [PLN] debt this month." << endl;
+
+    system("pause");
 }
-
-/*bool ItemMenager::sortByIntDate (Item &a,Item &b)
-{
-    return a.getIntDate() < b.getIntDate();
-}*/
