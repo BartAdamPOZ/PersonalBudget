@@ -52,7 +52,7 @@ int main()
                 personalBudget.displayBalanceForCurrentMonth();
                 break;
             case '4':
-                //personalBudget.displayBalanceForPreviousMonth();
+                personalBudget.displayBalanceForPreviousMonth();
                 break;
             case '5':
                 //personalBudget.displayBalanceForSelectedPeriod();

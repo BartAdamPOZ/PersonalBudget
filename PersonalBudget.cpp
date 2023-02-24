@@ -45,3 +45,7 @@ void PersonalBudget::displayBalanceForCurrentMonth()
 {
     itemMenager->displayBalanceForCurrentMonth();
 }
+void PersonalBudget::displayBalanceForPreviousMonth()
+{
+    itemMenager->displayBalanceForPreviousMonth();
+}

@@ -40,7 +40,7 @@ public:
     void addIncome();
     void addExpense();
     void displayBalanceForCurrentMonth();
-    struct sortByIntDate;
+    void displayBalanceForPreviousMonth();
 };
 
 
