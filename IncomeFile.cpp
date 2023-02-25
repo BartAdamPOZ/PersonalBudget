@@ -19,7 +19,7 @@ void IncomeFile::addIncomeToFile(Item income)
     xml.IntoElem();
     xml.AddElem("IncomeId", income.getItemId());
     xml.AddElem("UserId", income.getUserId());
-    xml.AddElem("Date", income.getItemDate()); // nalezy przesledzic jak tutaj zostaje zapisana data
+    xml.AddElem("Date", income.getItemDate());
     xml.AddElem("Item", income.getItemName());
     xml.AddElem("Amount", amount);
 

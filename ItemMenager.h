@@ -40,7 +40,8 @@ public:
     void addIncome();
     void addExpense();
     void displayBalanceForCurrentMonth();
-    /*bool sortByIntDate (Item &a,Item &b);*/
+    void displayBalanceForPreviousMonth();
+    void displayBalanceForSelectedPeriod();
 };
 
 
