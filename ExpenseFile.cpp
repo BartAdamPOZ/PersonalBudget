@@ -10,7 +10,7 @@ void ExpenseFile::addExpenseToFile(Item expense)
     if (!fileExist)
     {
         xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
-        xml.AddElem("Expense");
+        xml.AddElem("Expenses");
     }
 
     xml.FindElem();
@@ -55,7 +55,7 @@ vector <Item> ExpenseFile::getExpensesFromFile(int logInUserId)
             string itemName = xml.GetData();
             item.setItemName(itemName);
             xml.FindElem("Amount");
-            float itemAmount = atoi(xml.GetData().c_str());
+            float itemAmount = atof(xml.GetData().c_str());
             item.setItemAmount(itemAmount);
 
             if (userId == logInUserId)
