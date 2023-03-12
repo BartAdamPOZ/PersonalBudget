@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <iomanip>
 
 #include "IncomeFile.h"
 #include "ExpenseFile.h"
