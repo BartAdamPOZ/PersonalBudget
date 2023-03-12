@@ -55,7 +55,7 @@ vector <Item> IncomeFile::getIncomesFromFile(int logInUserId)
             string itemName = xml.GetData();
             item.setItemName(itemName);
             xml.FindElem("Amount");
-            float itemAmount = atoi(xml.GetData().c_str());
+            float itemAmount = atof(xml.GetData().c_str());
             item.setItemAmount(itemAmount);
 
             if (userId == logInUserId)
