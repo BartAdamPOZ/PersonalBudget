@@ -57,9 +57,14 @@ Item ItemMenager::provideIncomeDetails()
     cout << "Provide item desciption: ";
     itemName = SupportingMethods::loadLine();
     item.setItemName(itemName);
-    cout << "Provide amount: ";
-    stringAmount = SupportingMethods::loadLine();
-    stringAmount = SupportingMethods::changeComaToDot(stringAmount);
+
+    do
+    {
+        cout << "Provide amount: ";
+        stringAmount = SupportingMethods::loadLine();
+        stringAmount = SupportingMethods::changeComaToDot(stringAmount);
+    }while (!isFloat(stringAmount));
+
     amount = stof(stringAmount);
     item.setItemAmount(amount);
 
@@ -123,9 +128,12 @@ Item ItemMenager::provideExpenseDetails()
     cout << "Provide item desciption: ";
     itemName = SupportingMethods::loadLine();
     item.setItemName(itemName);
-    cout << "Provide amount: ";
-    stringAmount = SupportingMethods::loadLine();
-    stringAmount = SupportingMethods::changeComaToDot(stringAmount);
+    do
+    {
+        cout << "Provide amount: ";
+        stringAmount = SupportingMethods::loadLine();
+        stringAmount = SupportingMethods::changeComaToDot(stringAmount);
+    }while (!isFloat(stringAmount));
     amount = stof(stringAmount);
 
     item.setItemAmount(amount);
@@ -324,6 +332,7 @@ void ItemMenager::displayBalanceForPreviousMonth()
 
 void ItemMenager::displayBalanceForSelectedPeriod()
 {
+
     Item income;
     Item expense;
     vector <Item> incomesToSort;
@@ -428,4 +437,17 @@ void ItemMenager::displayBalanceForSelectedPeriod()
     incomesToSort.clear();
     expensesToSort.clear();
     system("pause");
+}
+
+bool ItemMenager::isFloat(string s)
+{
+    try
+    {
+        stof(s);
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
 }

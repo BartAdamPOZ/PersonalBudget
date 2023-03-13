@@ -29,6 +29,7 @@ class ItemMenager : public Item
     Item provideExpenseDetails();
     int getNewIncomeId();
     int getNewExpenseId();
+    bool isFloat(string s);
 
 public:
 
