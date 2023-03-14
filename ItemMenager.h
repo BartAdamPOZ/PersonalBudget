@@ -1,12 +1,8 @@
 #ifndef ITEMMENAGER_H
 #define ITEMMENAGER_H
 
-#include <iostream>
 #include <vector>
-#include <windows.h>
 #include <fstream>
-#include <sstream>
-#include <algorithm>
 #include <iomanip>
 
 #include "IncomeFile.h"
@@ -27,8 +23,8 @@ class ItemMenager : public Item
 
     Item provideIncomeDetails();
     Item provideExpenseDetails();
-    int getNewIncomeId();
-    int getNewExpenseId();
+    int checkNewIncomeId();
+    int checkNewExpenseId();
     bool isFloat(string s);
 
 public:

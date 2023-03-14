@@ -5,7 +5,6 @@
 #include <string>
 #include <sstream>
 #include <ctime>
-#include <windows.h>
 #include <cstdlib>
 
 #include "Date.h"
@@ -18,8 +17,6 @@ class DateMenager
     time_t calculatedTime;
     struct tm * data;
     int year, month, day;
-
-    const int MIN_VALID_YEAR = 2000;
 
     bool isLeap(int year);
 

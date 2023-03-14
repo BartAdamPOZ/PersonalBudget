@@ -1,9 +1,7 @@
 #ifndef INCOMEFILE_H
 #define INCOMEFILE_H
 
-#include <iostream>
 #include <vector>
-#include <windows.h>
 #include <fstream>
 #include <sstream>
 #include <cstdlib>

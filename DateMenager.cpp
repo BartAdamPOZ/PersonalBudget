@@ -55,6 +55,8 @@ bool DateMenager::isLeap(int year)
 
 bool DateMenager::isValidYear(int year)
 {
+    const int MIN_VALID_YEAR = 2000;
+
     if (year > getCurrentYear() || year < MIN_VALID_YEAR)
     {
          return false;
@@ -115,7 +117,7 @@ bool DateMenager::isValidDay(int day, int month, int year)
 
 bool DateMenager::isValidFormatDate(string date)
 {
-    if ((!date.size() == 10) || (!date[0] == 2) || (date[4] != '-') || (date[7] != '-'))
+    if ((date.size() != 10) || (date[0] != 2) || (date[4] != '-') || (date[7] != '-'))
         return false;
     else
         return true;
@@ -145,14 +147,6 @@ bool DateMenager::isDateCorrect(string date)
 
     return true;
 }
-
-
-/*void DateMenager::showDate(Date dateOb)
-{
-    cout << endl << "Year: " << dateOb.getYear() << endl;
-    cout << "Month: " << dateOb.getMonth() << endl;
-    cout << "Day: " << dateOb.getDay() << endl;
-}*/
 
 bool DateMenager::isDateExist(string date)
 {

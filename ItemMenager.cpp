@@ -10,9 +10,9 @@ void ItemMenager::addIncome()
 
 }
 
-int ItemMenager::getNewIncomeId()
+int ItemMenager::checkNewIncomeId()
 {
-    if (incomes.empty() == true)
+    if (incomes.empty())
         return 1;
     else
         return incomes.back().getItemId() + 1;
@@ -26,7 +26,7 @@ Item ItemMenager::provideIncomeDetails()
     float amount;
     char choice;
 
-    int itemId = getNewIncomeId();
+    int itemId = checkNewIncomeId();
     item.setItemId(itemId);
     item.setUserId(ID_LOGGED_USER);
 
@@ -47,9 +47,9 @@ Item ItemMenager::provideIncomeDetails()
             cout << "Provide past date in format YYYY-MM-DD: ";
             otherDate = SupportingMethods::loadLine();
 
-            if (dateMenager.isDateCorrect(otherDate) == false || dateMenager.isDateExist(otherDate) == false)
+            if (!dateMenager.isDateCorrect(otherDate) || !dateMenager.isDateExist(otherDate))
             cout << "Provided date is wrong. Try again! " << endl;
-        } while (dateMenager.isDateCorrect(otherDate) == false || dateMenager.isDateExist(otherDate) == false);
+        } while (!dateMenager.isDateCorrect(otherDate) || !dateMenager.isDateExist(otherDate));
 
         SupportingMethods::removeDashFromDate(otherDate);
         item.setStringDate(otherDate);
@@ -81,9 +81,9 @@ void ItemMenager::addExpense()
 
 }
 
-int ItemMenager::getNewExpenseId()
+int ItemMenager::checkNewExpenseId()
 {
-    if (expenses.empty() == true)
+    if (expenses.empty())
         return 1;
     else
         return expenses.back().getItemId() + 1;
@@ -97,7 +97,7 @@ Item ItemMenager::provideExpenseDetails()
     float amount;
     char choice;
 
-    int itemId = getNewExpenseId();
+    int itemId = checkNewExpenseId();
     item.setItemId(itemId);
     item.setUserId(ID_LOGGED_USER);
 
@@ -119,9 +119,9 @@ Item ItemMenager::provideExpenseDetails()
             cout << "Provide past date in format YYYY-MM-DD: ";
             otherDate = SupportingMethods::loadLine();
 
-            if (dateMenager.isDateCorrect(otherDate) == false || dateMenager.isDateExist(otherDate) == false)
+            if (!dateMenager.isDateCorrect(otherDate) || !dateMenager.isDateExist(otherDate))
             cout << "Provided date is wrong. Try again! " << endl;
-        } while (dateMenager.isDateCorrect(otherDate) == false || dateMenager.isDateExist(otherDate) == false);
+        } while (!dateMenager.isDateCorrect(otherDate) || !dateMenager.isDateExist(otherDate));
         SupportingMethods::removeDashFromDate(otherDate);
         item.setStringDate(otherDate);
     }

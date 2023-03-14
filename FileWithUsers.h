@@ -5,7 +5,6 @@
 #include <vector>
 #include <cstring>
 #include <string>
-#include <windows.h>
 
 #include "Markup.h"
 #include "XMLFile.h"

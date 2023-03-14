@@ -1,9 +1,7 @@
 #ifndef EXPENSEFILE_H
 #define EXPENSEFILE_H
 
-#include <iostream>
 #include <vector>
-#include <windows.h>
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
