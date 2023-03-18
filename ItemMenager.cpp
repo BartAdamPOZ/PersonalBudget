@@ -2,7 +2,9 @@
 
 void ItemMenager::addIncome()
 {
-    Item income = provideIncomeDetails();
+    int newItemId = checkNewIncomeId();
+    string incomeOrExpense = "income";
+    Item income = provideDetails(newItemId, incomeOrExpense);
     incomes.push_back(income);
     incomeFile.addIncomeToFile(income);
     cout << endl << "Income added to file" << endl << endl;
@@ -18,71 +20,15 @@ int ItemMenager::checkNewIncomeId()
         return incomes.back().getItemId() + 1;
 }
 
-Item ItemMenager::provideIncomeDetails()
-{
-    Item item;
-
-    string itemName, otherDate, currentStringDate, stringAmount;
-    float amount;
-    char choice;
-
-    int itemId = checkNewIncomeId();
-    item.setItemId(itemId);
-    item.setUserId(ID_LOGGED_USER);
-
-    cout << "Do you want to add income with current date?" << endl;
-    cout << "If yes, please click 'y'. If you awnt to chose other date, please click 'n': " << endl;
-    choice = SupportingMethods::getCharacter();
-
-    if (choice == 'y')
-    {
-        int currentDate = dateMenager.getCurrentDate();
-        currentStringDate = SupportingMethods::convertIntToString(currentDate);
-        currentStringDate = SupportingMethods::addDashToDate(currentStringDate);
-        item.setStringDate(currentStringDate);
-    }
-    else if (choice == 'n')
-    {
-        do{
-            cout << "Provide past date in format YYYY-MM-DD: ";
-            otherDate = SupportingMethods::loadLine();
-
-            if (!dateMenager.isDateCorrect(otherDate) || !dateMenager.isDateExist(otherDate))
-            cout << "Provided date is wrong. Try again! " << endl;
-        } while (!dateMenager.isDateCorrect(otherDate) || !dateMenager.isDateExist(otherDate));
-
-        SupportingMethods::removeDashFromDate(otherDate);
-        item.setStringDate(otherDate);
-    }
-    cout << "Provide item desciption: ";
-    itemName = SupportingMethods::loadLine();
-    item.setItemName(itemName);
-
-    cout << "Provide amount [PLN] : ";
-    stringAmount = SupportingMethods::loadLine();
-    stringAmount = SupportingMethods::changeComaToDot(stringAmount);
-    while (!isFloat(stringAmount))
-    {
-        cout << "Wrong value! Try again." << endl;
-        cout << "Provide amount [PLN] : ";
-        stringAmount = SupportingMethods::loadLine();
-        stringAmount = SupportingMethods::changeComaToDot(stringAmount);
-    }
-
-    amount = stof(stringAmount);
-    item.setItemAmount(amount);
-
-    return item;
-}
-
 void ItemMenager::addExpense()
 {
-    Item expense = provideExpenseDetails();
+    int newItemId = checkNewExpenseId();
+    string incomeOrExpense = "expense";
+    Item expense = provideDetails(newItemId, incomeOrExpense);
     expenses.push_back(expense);
     expenseFile.addExpenseToFile(expense);
     cout << endl << "Expense added to file" << endl << endl;
     system("pause");
-
 }
 
 int ItemMenager::checkNewExpenseId()
@@ -93,7 +39,7 @@ int ItemMenager::checkNewExpenseId()
         return expenses.back().getItemId() + 1;
 }
 
-Item ItemMenager::provideExpenseDetails()
+Item ItemMenager::provideDetails(int newItemId, string incomeOrExpense)
 {
     Item item;
 
@@ -101,12 +47,12 @@ Item ItemMenager::provideExpenseDetails()
     float amount;
     char choice;
 
-    int itemId = checkNewExpenseId();
+    int itemId = newItemId;
     item.setItemId(itemId);
     item.setUserId(ID_LOGGED_USER);
 
-    cout << "Do you want to add expense with current date?" << endl;
-    cout << "If yes, please click 'y'. If you awnt to chose other date, please click 'n': " << endl;
+    cout << "Do you want to add " << incomeOrExpense << " with current date?" << endl;
+    cout << "If yes, please click 'y'. If you want to chose other date, please click 'n': " << endl;
     choice = SupportingMethods::getCharacter();
 
     if (choice == 'y')
@@ -119,16 +65,19 @@ Item ItemMenager::provideExpenseDetails()
     }
     else if (choice == 'n')
     {
-        do{
+        do
+        {
             cout << "Provide past date in format YYYY-MM-DD: ";
             otherDate = SupportingMethods::loadLine();
 
             if (!dateMenager.isDateCorrect(otherDate) || !dateMenager.isDateExist(otherDate))
-            cout << "Provided date is wrong. Try again! " << endl;
-        } while (!dateMenager.isDateCorrect(otherDate) || !dateMenager.isDateExist(otherDate));
+                cout << "Provided date is wrong. Try again! " << endl;
+        }
+        while (!dateMenager.isDateCorrect(otherDate) || !dateMenager.isDateExist(otherDate));
         SupportingMethods::removeDashFromDate(otherDate);
         item.setStringDate(otherDate);
     }
+
     cout << "Provide item desciption: ";
     itemName = SupportingMethods::loadLine();
     item.setItemName(itemName);
@@ -136,6 +85,7 @@ Item ItemMenager::provideExpenseDetails()
     cout << "Provide amount [PLN] : ";
     stringAmount = SupportingMethods::loadLine();
     stringAmount = SupportingMethods::changeComaToDot(stringAmount);
+
     while (!isFloat(stringAmount))
     {
         cout << "Wrong value! Try again." << endl;
@@ -174,18 +124,18 @@ void ItemMenager::displayBalanceForSelectedPeriod()
     {
         cout << "Provided date is wrong. Try again! " << endl;
         cout << "Provide start period date in format YYYY-MM-DD : ";
-    boarderDateStartString = SupportingMethods::loadLine();
+        boarderDateStartString = SupportingMethods::loadLine();
     }
 
     boarderDateStart = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(boarderDateStartString));
 
-    cout << "Provide start period date in format YYYY-MM-DD : ";
+    cout << "Provide end period date in format YYYY-MM-DD : ";
     boarderDateEndString = SupportingMethods::loadLine();
     while (!dateMenager.isDateCorrect(boarderDateEndString) || !dateMenager.isDateExist(boarderDateEndString))
     {
         cout << "Provided date is wrong. Try again! " << endl;
-        cout << "Provide start period date in format YYYY-MM-DD : ";
-    boarderDateEndString = SupportingMethods::loadLine();
+        cout << "Provide end period date in format YYYY-MM-DD : ";
+        boarderDateEndString = SupportingMethods::loadLine();
     }
 
     boarderDateEnd = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(boarderDateEndString));
@@ -254,7 +204,6 @@ void ItemMenager::showBalance(int startDate, int endDate)
 
     cout << "SUM OF INCOMES : " << fixed << setprecision(2) << sumOfIncomes << " [PLN]" << endl << endl;
 
-
     for (unsigned int i = 0; i < expenses.size(); i++)
     {
         int intDate = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(expenses[i].getItemDate()));
@@ -289,6 +238,7 @@ void ItemMenager::showBalance(int startDate, int endDate)
         cout << "You generate : " << fixed << setprecision(2) << sumOfIncomes - sumOfExpenses << " [PLN] savings from: " << SupportingMethods::addDashToDate(SupportingMethods::convertIntToString(startDate)) << " to: " << SupportingMethods::addDashToDate(SupportingMethods::convertIntToString(endDate)) << endl;
     else
         cout << "You generate : " << fixed << setprecision(2) << sumOfExpenses - sumOfIncomes << " [PLN] debt from: " << SupportingMethods::addDashToDate(SupportingMethods::convertIntToString(startDate)) << " to: " << SupportingMethods::addDashToDate(SupportingMethods::convertIntToString(endDate)) << endl;
+
     incomesToSort.clear();
     expensesToSort.clear();
     system("pause");
