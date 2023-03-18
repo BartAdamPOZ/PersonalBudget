@@ -58,12 +58,16 @@ Item ItemMenager::provideIncomeDetails()
     itemName = SupportingMethods::loadLine();
     item.setItemName(itemName);
 
-    do
+    cout << "Provide amount [PLN] : ";
+    stringAmount = SupportingMethods::loadLine();
+    stringAmount = SupportingMethods::changeComaToDot(stringAmount);
+    while (!isFloat(stringAmount))
     {
-        cout << "Provide amount: ";
+        cout << "Wrong value! Try again." << endl;
+        cout << "Provide amount [PLN] : ";
         stringAmount = SupportingMethods::loadLine();
         stringAmount = SupportingMethods::changeComaToDot(stringAmount);
-    }while (!isFloat(stringAmount));
+    }
 
     amount = stof(stringAmount);
     item.setItemAmount(amount);
@@ -128,12 +132,18 @@ Item ItemMenager::provideExpenseDetails()
     cout << "Provide item desciption: ";
     itemName = SupportingMethods::loadLine();
     item.setItemName(itemName);
-    do
+
+    cout << "Provide amount [PLN] : ";
+    stringAmount = SupportingMethods::loadLine();
+    stringAmount = SupportingMethods::changeComaToDot(stringAmount);
+    while (!isFloat(stringAmount))
     {
-        cout << "Provide amount: ";
+        cout << "Wrong value! Try again." << endl;
+        cout << "Provide amount [PLN] : ";
         stringAmount = SupportingMethods::loadLine();
         stringAmount = SupportingMethods::changeComaToDot(stringAmount);
-    }while (!isFloat(stringAmount));
+    }
+
     amount = stof(stringAmount);
 
     item.setItemAmount(amount);
