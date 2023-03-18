@@ -5,7 +5,6 @@
 #include <string>
 #include <sstream>
 #include <ctime>
-#include <windows.h>
 #include <cstdlib>
 
 #include "Date.h"
@@ -19,8 +18,6 @@ class DateMenager
     struct tm * data;
     int year, month, day;
 
-    const int MIN_VALID_YEAR = 2000;
-
     bool isLeap(int year);
 
 public:
@@ -28,6 +25,8 @@ public:
     int getCurrentYear();
     int getCurrentMonth();
     int getCurrentDay();
+    int getPreviousMonthStartDate();
+    int getPreviousMonthEndDate();
 
     bool isDateCorrect(string date);
     bool isValidYear(int year);
@@ -35,6 +34,7 @@ public:
     bool isValidDay(int dayConverted, int monthConverted, int yearConverted);
     bool isValidFormatDate(string date);
     bool isDateExist(string date);
+
 
     //void showDate(Date dateOb);
 

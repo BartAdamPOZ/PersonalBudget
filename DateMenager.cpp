@@ -55,6 +55,8 @@ bool DateMenager::isLeap(int year)
 
 bool DateMenager::isValidYear(int year)
 {
+    const int MIN_VALID_YEAR = 2000;
+
     if (year > getCurrentYear() || year < MIN_VALID_YEAR)
     {
          return false;
@@ -146,14 +148,6 @@ bool DateMenager::isDateCorrect(string date)
     return true;
 }
 
-
-/*void DateMenager::showDate(Date dateOb)
-{
-    cout << endl << "Year: " << dateOb.getYear() << endl;
-    cout << "Month: " << dateOb.getMonth() << endl;
-    cout << "Day: " << dateOb.getDay() << endl;
-}*/
-
 bool DateMenager::isDateExist(string date)
 {
     string stringDateWithoutDash = SupportingMethods::removeDashFromDate(date);
@@ -163,4 +157,31 @@ bool DateMenager::isDateExist(string date)
         return false;
     else
         return true;
+}
+
+int DateMenager::getPreviousMonthStartDate()
+{
+    int previousMonthStartDate = 0;
+
+    if ((getCurrentMonth() - 1) == 0)
+        previousMonthStartDate += (getCurrentYear() - 1)*1000 + (12*100) + 1;
+    else
+        previousMonthStartDate += (getCurrentYear() * 10000) + ((getCurrentMonth() - 1)*100 + 1);
+
+    return previousMonthStartDate;
+}
+
+int DateMenager::getPreviousMonthEndDate()
+{
+    int previousMonthEndDate = 0;
+
+    previousMonthEndDate = getPreviousMonthStartDate();
+
+    do
+    {
+        previousMonthEndDate++;
+
+    } while (isDateCorrect(SupportingMethods::addDashToDate(SupportingMethods::convertIntToString(previousMonthEndDate))));
+
+    return previousMonthEndDate - 1;
 }

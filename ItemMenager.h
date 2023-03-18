@@ -27,8 +27,9 @@ class ItemMenager : public Item
 
     Item provideIncomeDetails();
     Item provideExpenseDetails();
-    int getNewIncomeId();
-    int getNewExpenseId();
+    int checkNewIncomeId();
+    int checkNewExpenseId();
+    bool isFloat(string s);
 
 public:
 
@@ -43,6 +44,7 @@ public:
     void displayBalanceForCurrentMonth();
     void displayBalanceForPreviousMonth();
     void displayBalanceForSelectedPeriod();
+    void showBalance(int startDate, int endDate);
 };
 
 
