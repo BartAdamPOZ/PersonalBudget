@@ -35,9 +35,6 @@ public:
     bool isValidFormatDate(string date);
     bool isDateExist(string date);
 
-
-    //void showDate(Date dateOb);
-
 };
 
 

@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include <windows.h>
 #include <fstream>
 #include <sstream>
 #include <algorithm>
@@ -25,8 +24,7 @@ class ItemMenager : public Item
     vector <Item> incomes;
     vector <Item> expenses;
 
-    Item provideIncomeDetails();
-    Item provideExpenseDetails();
+    Item provideDetails(int newItemId, string incomeOrExpense);
     int checkNewIncomeId();
     int checkNewExpenseId();
     bool isFloat(string s);
