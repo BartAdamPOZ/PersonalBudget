@@ -1,8 +1,12 @@
 #ifndef ITEMMENAGER_H
 #define ITEMMENAGER_H
 
+#include <iostream>
 #include <vector>
+#include <windows.h>
 #include <fstream>
+#include <sstream>
+#include <algorithm>
 #include <iomanip>
 
 #include "IncomeFile.h"
@@ -40,6 +44,7 @@ public:
     void displayBalanceForCurrentMonth();
     void displayBalanceForPreviousMonth();
     void displayBalanceForSelectedPeriod();
+    void showBalance(int startDate, int endDate);
 };
 
 

@@ -143,300 +143,44 @@ Item ItemMenager::provideExpenseDetails()
 
 void ItemMenager::displayBalanceForCurrentMonth()
 {
-    Item income;
-    Item expense;
-    vector <Item> incomesToSort;
-    vector <Item> expensesToSort;
-
-    float sumOfIncomes = 0;
-    float sumOfExpenses = 0;
-    int boarderDateStart = dateMenager.getCurrentDate() - dateMenager.getCurrentDay();
-
-    struct sortByIntDate
-    {
-        inline bool operator() (Item& struct1, Item& struct2)
-        {
-            return(struct1.getItemDate() < struct2.getItemDate());
-        }
-    };
-
-    for (unsigned int i = 0; i < incomes.size(); i++)
-    {
-        int intDate = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(incomes[i].getItemDate()));
-
-        if (intDate > boarderDateStart)
-        {
-            income.setStringDate(incomes[i].getItemDate());
-            income.setUserId(incomes[i].getUserId());
-            income.setItemId(incomes[i].getItemId());
-            income.setItemName(incomes[i].getItemName());
-            income.setItemAmount(incomes[i].getItemAmount());
-
-            incomesToSort.push_back(income);
-        }
-    }
-
-    sort(incomesToSort.begin( ), incomesToSort.end( ), sortByIntDate());
-
-    cout << endl << "          <<< INCOMES >>> " << endl << endl;
-
-    for (unsigned int i = 0; i < incomesToSort.size(); i++)
-    {
-        cout << "DATE : " << incomesToSort[i].getItemDate() << endl;
-        cout << "NAME : " << incomesToSort[i].getItemName() << endl;
-        cout << "AMOUNT : " << fixed << setprecision(2) << incomesToSort[i].getItemAmount() << endl << endl;
-        sumOfIncomes += incomesToSort[i].getItemAmount();
-    }
-
-    cout << "SUM OF INCOMES : " << fixed << setprecision(2) << sumOfIncomes << " [PLN]" << endl << endl;
-
-
-    for (unsigned int i = 0; i < expenses.size(); i++)
-    {
-        int intDate = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(expenses[i].getItemDate()));
-
-        if (intDate > boarderDateStart)
-        {
-            expense.setStringDate(expenses[i].getItemDate());
-            expense.setUserId(expenses[i].getUserId());
-            expense.setItemId(expenses[i].getItemId());
-            expense.setItemName(expenses[i].getItemName());
-            expense.setItemAmount(expenses[i].getItemAmount());
-
-            expensesToSort.push_back(expense);
-        }
-    }
-
-    sort(expensesToSort.begin( ), expensesToSort.end( ), sortByIntDate());
-
-    cout << endl << "          <<< EXPENSES >>> " << endl << endl;
-
-    for (unsigned int i = 0; i < expensesToSort.size(); i++)
-    {
-        cout << "DATE : " << expensesToSort[i].getItemDate() << endl;
-        cout << "NAME : " << expensesToSort[i].getItemName() << endl;
-        cout << "AMOUNT : " << fixed << setprecision(2) << expensesToSort[i].getItemAmount() << endl << endl;
-        sumOfExpenses += expensesToSort[i].getItemAmount();
-    }
-
-    cout << "SUM OF EXPENSES : " << fixed << setprecision(2) << sumOfExpenses << " [PLN]" << endl << endl;
-
-    if (sumOfIncomes >= sumOfExpenses)
-        cout << "You generate : " << fixed << setprecision(2) << sumOfIncomes - sumOfExpenses << " [PLN] savings this month." << endl;
-    else
-        cout << "You generate : " << fixed << setprecision(2) << sumOfExpenses - sumOfIncomes << " [PLN] debt this month." << endl;
-
-    incomesToSort.clear();
-    expensesToSort.clear();
-    system("pause");
+    showBalance(dateMenager.getCurrentDate() - dateMenager.getCurrentDay() + 1, dateMenager.getCurrentDate());
 }
 
 void ItemMenager::displayBalanceForPreviousMonth()
 {
-    Item income;
-    Item expense;
-    vector <Item> incomesToSort;
-    vector <Item> expensesToSort;
-
-    float sumOfIncomes = 0;
-    float sumOfExpenses = 0;
-    int boarderDateStart = 0;
-    int boarderDateEnd = 0;
-
-    struct sortByIntDate
-    {
-        inline bool operator() (Item& struct1, Item& struct2)
-        {
-            return(struct1.getItemDate() < struct2.getItemDate());
-        }
-    };
-
-    if ((dateMenager.getCurrentMonth() - 1) == 0)
-        boarderDateStart += (dateMenager.getCurrentYear() - 1)*1000 + (12*100);
-    else
-        boarderDateStart += (dateMenager.getCurrentYear() * 10000) + ((dateMenager.getCurrentMonth() - 1)*100);
-
-    boarderDateEnd = dateMenager.getCurrentDate() - dateMenager.getCurrentDay();
-
-     for (unsigned int i = 0; i < incomes.size(); i++)
-    {
-        int intDate = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(incomes[i].getItemDate()));
-
-        if (intDate > boarderDateStart && intDate < boarderDateEnd)
-        {
-            income.setStringDate(incomes[i].getItemDate());
-            income.setUserId(incomes[i].getUserId());
-            income.setItemId(incomes[i].getItemId());
-            income.setItemName(incomes[i].getItemName());
-            income.setItemAmount(incomes[i].getItemAmount());
-
-            incomesToSort.push_back(income);
-        }
-    }
-
-    sort(incomesToSort.begin( ), incomesToSort.end( ), sortByIntDate());
-
-    cout << endl << "          <<< INCOMES >>> " << endl << endl;
-
-    for (unsigned int i = 0; i < incomesToSort.size(); i++)
-    {
-        cout << "DATE : " << incomesToSort[i].getItemDate() << endl;
-        cout << "NAME : " << incomesToSort[i].getItemName() << endl;
-        cout << "AMOUNT : " << fixed << setprecision(2) << incomesToSort[i].getItemAmount() << endl << endl;
-        sumOfIncomes += incomesToSort[i].getItemAmount();
-    }
-
-    cout << "SUM OF INCOMES : " << fixed << setprecision(2) << sumOfIncomes << " [PLN]" << endl << endl;
-
-    for (unsigned int i = 0; i < expenses.size(); i++)
-    {
-        int intDate = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(expenses[i].getItemDate()));
-
-        if (intDate > boarderDateStart && intDate < boarderDateEnd)
-        {
-            expense.setStringDate(expenses[i].getItemDate());
-            expense.setUserId(expenses[i].getUserId());
-            expense.setItemId(expenses[i].getItemId());
-            expense.setItemName(expenses[i].getItemName());
-            expense.setItemAmount(expenses[i].getItemAmount());
-
-            expensesToSort.push_back(expense);
-        }
-    }
-
-    sort(expensesToSort.begin( ), expensesToSort.end( ), sortByIntDate());
-
-    cout << endl << "          <<< EXPENSES >>> " << endl << endl;
-
-    for (unsigned int i = 0; i < expensesToSort.size(); i++)
-    {
-        cout << "DATE : " << expensesToSort[i].getItemDate() << endl;
-        cout << "NAME : " << expensesToSort[i].getItemName() << endl;
-        cout << "AMOUNT : " << fixed << setprecision(2) << expensesToSort[i].getItemAmount() << endl << endl;
-        sumOfExpenses += expensesToSort[i].getItemAmount();
-    }
-
-    cout << "SUM OF EXPENSES : " << sumOfExpenses << " [PLN]" << endl << endl;
-
-    if (sumOfIncomes >= sumOfExpenses)
-        cout << "You generate : " << fixed << setprecision(2) << sumOfIncomes - sumOfExpenses << " [PLN] savings last month." << endl;
-
-    else
-        cout << "You generate : " << fixed << setprecision(2) << sumOfExpenses - sumOfIncomes << " [PLN] debt last month." << endl;
-
-    incomesToSort.clear();
-    expensesToSort.clear();
-    system("pause");
-
+    showBalance(dateMenager.getPreviousMonthStartDate(), dateMenager.getPreviousMonthEndDate());
 }
 
 void ItemMenager::displayBalanceForSelectedPeriod()
 {
-
-    Item income;
-    Item expense;
-    vector <Item> incomesToSort;
-    vector <Item> expensesToSort;
-
-    float sumOfIncomes = 0;
-    float sumOfExpenses = 0;
     string boarderDateStartString;
     int boarderDateStart = 0;
     string boarderDateEndString;
     int boarderDateEnd = 0;
 
-    struct sortByIntDate
+    cout << "Provide start period date in format YYYY-MM-DD : ";
+    boarderDateStartString = SupportingMethods::loadLine();
+    while (!dateMenager.isDateCorrect(boarderDateStartString) || !dateMenager.isDateExist(boarderDateStartString))
     {
-        inline bool operator() (Item& struct1, Item& struct2)
-        {
-            return(struct1.getItemDate() < struct2.getItemDate());
-        }
-    };
+        cout << "Provided date is wrong. Try again! " << endl;
+        cout << "Provide start period date in format YYYY-MM-DD : ";
+    boarderDateStartString = SupportingMethods::loadLine();
+    }
 
-    do{
-            cout << "Provide start period date in format YYYY-MM-DD : ";
-            boarderDateStartString = SupportingMethods::loadLine();
-            if (dateMenager.isDateCorrect(boarderDateStartString) == false || dateMenager.isDateExist(boarderDateStartString) == false)
-                cout << "Provided date is wrong. Try again! " << endl;
-        } while (dateMenager.isDateCorrect(boarderDateStartString) == false || dateMenager.isDateExist(boarderDateStartString) == false);
     boarderDateStart = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(boarderDateStartString));
 
-    do{
-            cout << "Provide end period date in format YYYY-MM-DD : ";
-            boarderDateEndString = SupportingMethods::loadLine();
-            if (dateMenager.isDateCorrect(boarderDateEndString) == false || dateMenager.isDateExist(boarderDateEndString) == false)
-                cout << "Provided date is wrong. Try again! " << endl;
-        } while (dateMenager.isDateCorrect(boarderDateEndString) == false || dateMenager.isDateExist(boarderDateEndString) == false);
+    cout << "Provide start period date in format YYYY-MM-DD : ";
+    boarderDateEndString = SupportingMethods::loadLine();
+    while (!dateMenager.isDateCorrect(boarderDateEndString) || !dateMenager.isDateExist(boarderDateEndString))
+    {
+        cout << "Provided date is wrong. Try again! " << endl;
+        cout << "Provide start period date in format YYYY-MM-DD : ";
+    boarderDateEndString = SupportingMethods::loadLine();
+    }
+
     boarderDateEnd = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(boarderDateEndString));
 
-     for (unsigned int i = 0; i < incomes.size(); i++)
-    {
-        int intDate = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(incomes[i].getItemDate()));
-
-        if (intDate >= boarderDateStart && intDate <= boarderDateEnd)
-        {
-            income.setStringDate(incomes[i].getItemDate());
-            income.setUserId(incomes[i].getUserId());
-            income.setItemId(incomes[i].getItemId());
-            income.setItemName(incomes[i].getItemName());
-            income.setItemAmount(incomes[i].getItemAmount());
-
-            incomesToSort.push_back(income);
-        }
-    }
-
-    sort(incomesToSort.begin( ), incomesToSort.end( ), sortByIntDate());
-
-    cout << endl << "          <<< INCOMES >>> " << endl << endl;
-
-    for (unsigned int i = 0; i < incomesToSort.size(); i++)
-    {
-        cout << "DATE : " << incomesToSort[i].getItemDate() << endl;
-        cout << "NAME : " << incomesToSort[i].getItemName() << endl;
-        cout << "AMOUNT : " << fixed << setprecision(2) << incomesToSort[i].getItemAmount() << endl << endl;
-        sumOfIncomes += incomesToSort[i].getItemAmount();
-    }
-
-    cout << "SUM OF INCOMES : " << fixed << setprecision(2) << sumOfIncomes << " [PLN]" << endl << endl;
-
-    for (unsigned int i = 0; i < expenses.size(); i++)
-    {
-        int intDate = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(expenses[i].getItemDate()));
-
-        if (intDate >= boarderDateStart && intDate <= boarderDateEnd)
-        {
-            expense.setStringDate(expenses[i].getItemDate());
-            expense.setUserId(expenses[i].getUserId());
-            expense.setItemId(expenses[i].getItemId());
-            expense.setItemName(expenses[i].getItemName());
-            expense.setItemAmount(expenses[i].getItemAmount());
-
-            expensesToSort.push_back(expense);
-        }
-    }
-
-    sort(expensesToSort.begin( ), expensesToSort.end( ), sortByIntDate());
-
-    cout << endl << "          <<< EXPENSES >>> " << endl << endl;
-
-    for (unsigned int i = 0; i < expensesToSort.size(); i++)
-    {
-        cout << "DATE : " << expensesToSort[i].getItemDate() << endl;
-        cout << "NAME : " << expensesToSort[i].getItemName() << endl;
-        cout << "AMOUNT : " << fixed << setprecision(2) << expensesToSort[i].getItemAmount() << endl << endl;
-        sumOfExpenses += expensesToSort[i].getItemAmount();
-    }
-
-    cout << "SUM OF EXPENSES : " << fixed << setprecision(2) << sumOfExpenses << " [PLN]" << endl << endl;
-
-    if (sumOfIncomes >= sumOfExpenses)
-        cout << "You generate : " << fixed << setprecision(2) << sumOfIncomes - sumOfExpenses << " [PLN] savings from " << boarderDateStartString << " to " << boarderDateEndString << endl;
-    else
-        cout << "You generate : " << fixed << setprecision(2) << sumOfExpenses - sumOfIncomes << " [PLN] debt from " << boarderDateStartString << " to " << boarderDateEndString << endl;
-
-    incomesToSort.clear();
-    expensesToSort.clear();
-    system("pause");
+    showBalance(boarderDateStart, boarderDateEnd);
 }
 
 bool ItemMenager::isFloat(string s)
@@ -451,3 +195,92 @@ bool ItemMenager::isFloat(string s)
         return false;
     }
 }
+
+void ItemMenager::showBalance(int startDate, int endDate)
+{
+    Item income;
+    Item expense;
+    vector <Item> incomesToSort;
+    vector <Item> expensesToSort;
+
+    float sumOfIncomes = 0;
+    float sumOfExpenses = 0;
+
+    struct sortByIntDate
+    {
+        inline bool operator() (Item& struct1, Item& struct2)
+        {
+            return(struct1.getItemDate() < struct2.getItemDate());
+        }
+    };
+
+    for (unsigned int i = 0; i < incomes.size(); i++)
+    {
+        int intDate = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(incomes[i].getItemDate()));
+
+        if (intDate >= startDate && intDate <= endDate)
+        {
+            income.setStringDate(incomes[i].getItemDate());
+            income.setUserId(incomes[i].getUserId());
+            income.setItemId(incomes[i].getItemId());
+            income.setItemName(incomes[i].getItemName());
+            income.setItemAmount(incomes[i].getItemAmount());
+
+            incomesToSort.push_back(income);
+        }
+    }
+
+    sort(incomesToSort.begin( ), incomesToSort.end( ), sortByIntDate());
+
+    cout << endl << "          <<< INCOMES >>> " << endl << endl;
+
+    for (unsigned int i = 0; i < incomesToSort.size(); i++)
+    {
+        cout << "DATE : " << incomesToSort[i].getItemDate() << endl;
+        cout << "NAME : " << incomesToSort[i].getItemName() << endl;
+        cout << "AMOUNT : " << fixed << setprecision(2) << incomesToSort[i].getItemAmount() << endl << endl;
+        sumOfIncomes += incomesToSort[i].getItemAmount();
+    }
+
+    cout << "SUM OF INCOMES : " << fixed << setprecision(2) << sumOfIncomes << " [PLN]" << endl << endl;
+
+
+    for (unsigned int i = 0; i < expenses.size(); i++)
+    {
+        int intDate = SupportingMethods::convertStringToInt(SupportingMethods::removeDashFromDate(expenses[i].getItemDate()));
+
+        if (intDate >= startDate && intDate <= endDate)
+        {
+            expense.setStringDate(expenses[i].getItemDate());
+            expense.setUserId(expenses[i].getUserId());
+            expense.setItemId(expenses[i].getItemId());
+            expense.setItemName(expenses[i].getItemName());
+            expense.setItemAmount(expenses[i].getItemAmount());
+
+            expensesToSort.push_back(expense);
+        }
+    }
+
+    sort(expensesToSort.begin( ), expensesToSort.end( ), sortByIntDate());
+
+    cout << endl << "          <<< EXPENSES >>> " << endl << endl;
+
+    for (unsigned int i = 0; i < expensesToSort.size(); i++)
+    {
+        cout << "DATE : " << expensesToSort[i].getItemDate() << endl;
+        cout << "NAME : " << expensesToSort[i].getItemName() << endl;
+        cout << "AMOUNT : " << fixed << setprecision(2) << expensesToSort[i].getItemAmount() << endl << endl;
+        sumOfExpenses += expensesToSort[i].getItemAmount();
+    }
+
+    cout << "SUM OF EXPENSES : " << fixed << setprecision(2) << sumOfExpenses << " [PLN]" << endl << endl;
+
+    if (sumOfIncomes >= sumOfExpenses)
+        cout << "You generate : " << fixed << setprecision(2) << sumOfIncomes - sumOfExpenses << " [PLN] savings from: " << SupportingMethods::addDashToDate(SupportingMethods::convertIntToString(startDate)) << " to: " << SupportingMethods::addDashToDate(SupportingMethods::convertIntToString(endDate)) << endl;
+    else
+        cout << "You generate : " << fixed << setprecision(2) << sumOfExpenses - sumOfIncomes << " [PLN] debt from: " << SupportingMethods::addDashToDate(SupportingMethods::convertIntToString(startDate)) << " to: " << SupportingMethods::addDashToDate(SupportingMethods::convertIntToString(endDate)) << endl;
+    incomesToSort.clear();
+    expensesToSort.clear();
+    system("pause");
+}
+

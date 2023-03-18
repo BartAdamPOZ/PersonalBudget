@@ -117,7 +117,7 @@ bool DateMenager::isValidDay(int day, int month, int year)
 
 bool DateMenager::isValidFormatDate(string date)
 {
-    if ((date.size() != 10) || (date[0] != 2) || (date[4] != '-') || (date[7] != '-'))
+    if ((!date.size() == 10) || (!date[0] == 2) || (date[4] != '-') || (date[7] != '-'))
         return false;
     else
         return true;
@@ -157,4 +157,31 @@ bool DateMenager::isDateExist(string date)
         return false;
     else
         return true;
+}
+
+int DateMenager::getPreviousMonthStartDate()
+{
+    int previousMonthStartDate = 0;
+
+    if ((getCurrentMonth() - 1) == 0)
+        previousMonthStartDate += (getCurrentYear() - 1)*1000 + (12*100) + 1;
+    else
+        previousMonthStartDate += (getCurrentYear() * 10000) + ((getCurrentMonth() - 1)*100 + 1);
+
+    return previousMonthStartDate;
+}
+
+int DateMenager::getPreviousMonthEndDate()
+{
+    int previousMonthEndDate = 0;
+
+    previousMonthEndDate = getPreviousMonthStartDate();
+
+    do
+    {
+        previousMonthEndDate++;
+
+    } while (isDateCorrect(SupportingMethods::addDashToDate(SupportingMethods::convertIntToString(previousMonthEndDate))));
+
+    return previousMonthEndDate - 1;
 }

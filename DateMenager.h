@@ -25,6 +25,8 @@ public:
     int getCurrentYear();
     int getCurrentMonth();
     int getCurrentDay();
+    int getPreviousMonthStartDate();
+    int getPreviousMonthEndDate();
 
     bool isDateCorrect(string date);
     bool isValidYear(int year);
@@ -32,6 +34,7 @@ public:
     bool isValidDay(int dayConverted, int monthConverted, int yearConverted);
     bool isValidFormatDate(string date);
     bool isDateExist(string date);
+
 
     //void showDate(Date dateOb);
 
